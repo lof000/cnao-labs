@@ -1,0 +1,16 @@
+replicaCount: 1
+
+image:
+  inventory_api: "leandrovo/inventory-service:4.0"
+  pullPolicy: Always
+
+configMap:
+  rds:
+    spring_datasource_url: "jdbc:mysql://inventory-mysql-svc:3306/inventoryDB"
+    spring_datasource_username: "springuser"
+    spring_datasource_password: "ThePassword"
+    driver_class_name: "com.mysql.cj.jdbc.Driver"
+    procedure_delay: "10" #delay in seconds
+    db_type: "MYSQL" #MSSQL OR MYSQL
+
+

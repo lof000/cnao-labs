@@ -1,0 +1,75 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: inventory-api
+  name: inventory-api
+  namespace: inventory
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-api
+  strategy: {}
+  template:
+    metadata:
+#      annotations:
+#        instrumentation.opentelemetry.io/inject-java: "true"    
+      creationTimestamp: null
+      labels:
+        app: inventory-api
+    spec:
+      containers:
+      - image: "{{ .Values.image.inventory_api }}"
+        name: inventory-api-c
+        imagePullPolicy: Always
+        env:
+        - name: spring.jpa.hibernate.ddl-auto
+          value: "create-drop"
+        - name: spring.datasource.driver-class-name
+          value: "{{ .Values.configMap.rds.driver_class_name }}"  
+        - name: spring.datasource.url
+          value: "{{ .Values.configMap.rds.spring_datasource_url }}"  
+        - name: spring.datasource.username
+          value: "{{ .Values.configMap.rds.spring_datasource_username }}"  
+        - name: spring.datasource.password
+          value: "{{ .Values.configMap.rds.spring_datasource_password }}"  
+        - name: spring.jpa.database-platform
+          value: "{{ .Values.configMap.rds.spring_jpa_database_platform }}"  
+        - name: spring.datasource.testOnBorrow
+          value: "true"
+        - name: spring.datasource.validationQuery
+          value: "SELECT 1"          
+        - name: spring.jpa.show-sql
+          value: "false"  
+        - name: spring.jpa.properties.hibernate.format_sql
+          value: "true" 
+        - name: PROCEDURE_DELAY
+          value: "{{ .Values.configMap.rds.procedure_delay }}"  
+        - name: DB
+          value: "{{ .Values.configMap.rds.db_type }}"                  
+        ports:
+        - containerPort: 8080          
+        resources: {}
+status: {}
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: inventory-api
+  name: inventory-api-svc
+  namespace: inventory
+spec:
+  ports:
+  - port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: inventory-api
+status:
+  loadBalancer: {}

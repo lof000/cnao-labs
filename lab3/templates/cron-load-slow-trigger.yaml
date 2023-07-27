@@ -1,0 +1,31 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: inventory-cron-load-slow
+  namespace: inventory
+spec:
+  schedule: "*/5 * * * *"  
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 3
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: loadgo
+              image: nginx
+              command:
+                - /bin/bash
+                - -c
+                - /tmp/load_slow.sh
+              volumeMounts:
+                - name: mnt
+                  mountPath: /tmp          
+          volumes:
+          - name: mnt
+            configMap:
+              name: cm-inventory
+              defaultMode: 0777
+          restartPolicy:  Never
+      backoffLimit: 3

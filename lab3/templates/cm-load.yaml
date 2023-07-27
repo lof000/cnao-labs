@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cm-inventory
+  namespace: inventory
+data:
+  load.sh: |
+    for i in {1..25}
+    do
+      curl http://inventory-api-svc:8080/inventory/add -d name=item$1
+      curl http://inventory-api-svc:8080/inventory/deliver
+      sleep 10
+    done
+
+    for i in {1..300}
+    do
+      curl http://inventory-api-svc:8080/inventory/all 
+      sleep 1
+    done
+
+    curl http://inventory-api-svc:8080/inventory/reap
+
+  load_slow.sh: |
+    while true
+    do
+      curl  http:/inventory-api-svc:8080/inventory/allinventory
+      sleep .5
+    done
+

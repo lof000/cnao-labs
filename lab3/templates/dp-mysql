@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: mysql
+  name: inventory-mysql
+  namespace: inventory
+spec:
+  containers:
+  - image: mysql
+    imagePullPolicy: Always
+    name: mysql
+    resources: {}
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    ports:
+    env:
+    - name: MYSQL_ROOT_PASSWORD
+      value: "root"
+    - name: MYSQL_USER
+      value: "springuser"
+    - name: MYSQL_PASSWORD
+      value: "ThePassword"
+    - name: MYSQL_DATABASE
+      value: "inventoryDB"
+  restartPolicy: Always

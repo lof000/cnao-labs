@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: inventory-api-load
+  name: inventory-api-load
+  namespace: inventory
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-api-load
+  strategy: {}
+  template:
+    metadata: 
+      creationTimestamp: null
+      labels:
+        app: inventory-api-load
+    spec:
+      containers:
+      - image: nginx
+        name: inventory-api-l
+        imagePullPolicy: Always
+        command:
+          - /bin/bash
+          - -c
+          - /tmp/load.sh
+        volumeMounts:
+          - name: mnt
+            mountPath: /tmp  
+      volumes:
+      - name: mnt
+        configMap:
+          name: cm-inventory
+          defaultMode: 0777                     
