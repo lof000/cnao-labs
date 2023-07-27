@@ -1,5 +1,7 @@
 replicaCount: 1
 
+username: "ledeoliv"
+
 image:
   inventory_api: "leandrovo/inventory-service:4.0"
   pullPolicy: Always

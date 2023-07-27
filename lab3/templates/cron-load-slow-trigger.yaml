@@ -2,7 +2,7 @@ apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: inventory-cron-load-slow
-  namespace: inventory
+  namespace: inventory{{ .Values.username }}
 spec:
   schedule: "*/5 * * * *"  
   successfulJobsHistoryLimit: 1

@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: cm-inventory
-  namespace: inventory
+  namespace: inventory{{ .Values.username }}
 data:
   load.sh: |
     for i in {1..25}

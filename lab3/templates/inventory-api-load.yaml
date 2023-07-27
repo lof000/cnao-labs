@@ -5,7 +5,7 @@ metadata:
   labels:
     app: inventory-api-load
   name: inventory-api-load
-  namespace: inventory
+  namespace: inventory{{ .Values.username }}
 spec:
   replicas: 1
   selector:

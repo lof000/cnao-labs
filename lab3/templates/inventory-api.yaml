@@ -5,7 +5,7 @@ metadata:
   labels:
     app: inventory-api
   name: inventory-api
-  namespace: inventory
+  namespace: inventory{{ .Values.username }}
 spec:
   replicas: 1
   selector:
@@ -14,8 +14,8 @@ spec:
   strategy: {}
   template:
     metadata:
-#      annotations:
-#        instrumentation.opentelemetry.io/inject-java: "true"    
+      annotations:
+        instrumentation.opentelemetry.io/inject-java: "true"    
       creationTimestamp: null
       labels:
         app: inventory-api
@@ -63,7 +63,7 @@ metadata:
   labels:
     app: inventory-api
   name: inventory-api-svc
-  namespace: inventory
+  namespace: inventory{{ .Values.username }}
 spec:
   ports:
   - port: 8080

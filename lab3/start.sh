@@ -1,4 +1,6 @@
+clear
+source ./setenv.sh
 
-kubectl scale deployment inventory-api-load -n inventory --replicas=1
+kubectl scale deployment inventory-api-load -n inventory${username} --replicas=1
 
-kubectl patch cronjobs inventory-cron-load-slow -n inventory -p '{"spec" : {"suspend" : false }}'
+kubectl patch cronjobs inventory-cron-load-slow -n inventory${username}  -p '{"spec" : {"suspend" : false }}'

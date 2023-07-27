@@ -1,2 +1,3 @@
 clear
-kubectl get all -n inventory
+source ./setenv.sh
+kubectl get all -n inventory${username} 
