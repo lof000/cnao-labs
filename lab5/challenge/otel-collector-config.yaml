@@ -1,0 +1,47 @@
+receivers:
+  otlp:
+    protocols:
+      grpc:
+      http:
+
+processors:
+  resource:
+    attributes:
+      - key: appdynamics.controller.account
+        action: upsert
+        value: "account"
+      - key: appdynamics.controller.host
+        action: upsert
+        value: "host"
+      - key: appdynamics.controller.port
+        action: upsert
+        value: 443
+  batch:
+
+exporters:
+
+  logging:
+    loglevel: debug
+
+  otlphttp:
+    endpoint: "xxxx"    
+    headers: {"xxxxx"}
+
+extensions:
+  health_check:
+  pprof:
+    endpoint: :1888
+  zpages:
+    endpoint: :55679
+
+service:
+  extensions: [pprof, zpages, health_check]
+  pipelines:
+    traces:
+      receivers: [otlp]
+      processors: [resource, batch]
+      exporters: [logging, otlphttp]
+    metrics:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [logging]
