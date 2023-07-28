@@ -1,0 +1,27 @@
+global:
+  clusterName: <<cluster_name>>
+fso-agent-mgmt-client:
+  solution:
+    endpoint:
+  oauth:
+    clientId:
+    clientSecret:
+    tokenUrl:
+    tenantId:
+
+appdynamics-otel-collector:
+  clientId:
+  clientSecret:
+  endpoint:
+  tokenUrl:
+
+appdynamics-cloud-k8s-monitoring:
+  install:
+    logCollector: true
+  clustermonConfig:
+    clusterName: <<cluster_name>>
+    events:
+      enabled: true
+      severityToExclude: []
+      reasonToExclude: []
+      severeGroupByReason: []

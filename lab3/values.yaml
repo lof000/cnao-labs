@@ -1,6 +1,6 @@
 replicaCount: 1
 
-username: "ledeoliv"
+username: "<username>"
 
 image:
   inventory_api: "leandrovo/inventory-service:4.0"
