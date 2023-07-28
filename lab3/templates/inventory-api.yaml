@@ -14,8 +14,6 @@ spec:
   strategy: {}
   template:
     metadata:
-      annotations:
-        instrumentation.opentelemetry.io/inject-java: "true"    
       creationTimestamp: null
       labels:
         app: inventory-api
