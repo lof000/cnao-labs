@@ -8,7 +8,7 @@ data:
     for i in {1..25}
     do
       curl http://inventory-api-svc:8080/inventory/add -d name=item$1
-      curl http://inventory-api-svc:8080/inventory/deliver
+      #curl http://inventory-api-svc:8080/inventory/deliver
       sleep 10
     done
 
