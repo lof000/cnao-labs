@@ -3,7 +3,7 @@ replicaCount: 1
 username: "<username>"
 
 image:
-  inventory_api: "leandrovo/inventory-service:4.0"
+  inventory_api: "leandrovo/inventory-service:5.0"
   pullPolicy: Always
 
 configMap:
