@@ -22,7 +22,7 @@ services:
 # AGENTE JAVA - OTEL
 # APM - AGENT VOLUME (SIDECAR)
   otel-agent-saas:
-    image: leandrovo/otel-agent-java:1.20.0
+    image: leandrovo/otel-agent-java:latest
     container_name: otel-java-agent
     volumes:
       - otel-agent-volume:/opt/agent
@@ -57,7 +57,7 @@ services:
   otel-collector:
     image: otel/opentelemetry-collector-contrib:latest
     container_name: otel-collector
-    command: "--config=/etc/otel-collector-config.yaml ${OTELCOL_ARGS}"
+    command: "--config=/etc/otel-collector-config.yaml"
     # Change the "source" path below to swap out collector config files!
     volumes:
       - type: bind

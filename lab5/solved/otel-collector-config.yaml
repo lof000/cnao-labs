@@ -7,10 +7,10 @@ receivers:
 exporters:
   logging:
     loglevel: debug
-  otlphttp: #### Mandatory for AppDynamics Cloud
+  otlphttp: 
     auth:
-      authenticator: xxxx
-    traces_endpoint: xxxx
+      authenticator: oauth2client
+    traces_endpoint: https://xxx/data/v1/trace
 
 processors:
   batch: #### Optional for trace batching for AppDynamics Cloud
@@ -20,9 +20,9 @@ processors:
 
 extensions: #### Mandatory for AppDynamics Cloud
   oauth2client:
-    client_id: xxxxx
-    client_secret: xxxxx
-    token_url: xxxx
+    client_id: xxx
+    client_secret: xxx
+    token_url: xxx
 
 service:
   extensions: #### Mandatory for AppD Cloud
