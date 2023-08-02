@@ -29,6 +29,7 @@ resource "aws_eks_cluster" "aws_eks" {
   #name     = "${var.cluster-name}-${local.caller_name}"
   name     = "${var.cluster-name}"
   role_arn = aws_iam_role.eks_cluster.arn
+  version  = "1.24"
 
   vpc_config {
     subnet_ids = [aws_default_subnet.default_az1.id,aws_default_subnet.default_az2.id]
